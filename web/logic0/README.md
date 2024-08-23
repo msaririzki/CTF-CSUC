@@ -1,4 +1,4 @@
-# Baby XSS
+# Logic0
 
 by m1kasha
 
@@ -7,14 +7,14 @@ by m1kasha
 ## Flag
 
 ```
-CSUC{th1s_first_walk_for_your_ctf_journey}
+CSUC{Yeay_upgrade_l3v3l_y0ur_not_0_logic_again}
 ```
 
 ## Description
-Try To Search Anything in my funny web, Looks Code ?
+just look and understand logic program is the key
 
 ## Difficultys
-newbie
+Easy
 
 ## Hints
 
@@ -26,4 +26,4 @@ newbie
 ## Attachment
 
 ## POC
-1. just look code at index.html, index.css, index.js the flag divide by 3 part so checking html css and js
+
