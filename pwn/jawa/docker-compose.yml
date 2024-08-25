@@ -1,0 +1,12 @@
+version: '3'
+services:
+  csuc:
+    container_name: Jawa
+    restart: always
+    build:
+      context: .
+    working_dir: /home/ctf
+    ports:
+      - "1555:2222" # exposed:local
+    entrypoint: /etc/run_xinetd.sh
+    read_only: true
