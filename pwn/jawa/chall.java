@@ -56,6 +56,7 @@ public class chall{
                     break;
                 case 2:
                     read();
+                    break;
                 case 3:
                     return;
                 default:
