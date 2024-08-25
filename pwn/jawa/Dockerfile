@@ -4,7 +4,18 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Update the package list and install dependencies
 RUN apt-get update --fix-missing && apt-get -y upgrade
-RUN apt-get install -y openjdk-22-jre-headless xinetd
+RUN apt-get install -y wget tar xinetd
+
+
+# Unduh dan instal JDK 22
+RUN wget https://download.oracle.com/java/22/latest/jdk-22_linux-x64_bin.deb -P /tmp \
+    && apt-get update \
+    && apt-get install -y /tmp/jdk-22_linux-x64_bin.deb \
+    && rm /tmp/jdk-22_linux-x64_bin.deb
+
+# Atur JAVA_HOME dan PATH
+ENV JAVA_HOME=/usr/lib/jvm/jdk-22
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 # Create ctf-user
 RUN groupadd -r ctf && useradd -r -g ctf ctf
