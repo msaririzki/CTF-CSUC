@@ -1,4 +1,4 @@
-# Ulala
+# Basic NC & little encoded
 
 by m1kasha
 
