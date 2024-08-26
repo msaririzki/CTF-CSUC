@@ -1,0 +1,12 @@
+version: '3'
+services:
+  csuc:
+    container_name: Basic
+    restart: always
+    build:
+      context: .
+    working_dir: /home/ctf
+    ports:
+      - "4444:4444" # exposed:local
+    entrypoint: /etc/run_xinetd.sh
+    read_only: true
