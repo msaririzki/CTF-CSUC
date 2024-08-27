@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+    csuc:
+        build: src/
+        image: anya
+        container_name: anya
+        restart: always
+        ports:
+            - "6666:6666"

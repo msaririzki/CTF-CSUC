@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/redpwn/rcds/master/rcds/challenge/challenge.schema.yaml
+
+name: chall
+author: m1kasha
+description: |-
+  Just try
+
+  Connect: nc localhost 6666
+
+flag:
+  file: ./src/flag.txt
+
+provide:
+  - ./dist/chall
+
+script:
+  start: (docker compose up --build -d)
+  stop: (docker compose down)
