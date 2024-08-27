@@ -3,8 +3,8 @@ services:
     build: .
     expose:
       - 80
-    # ports:
-    # - "9012:80"
+    ports:
+      - "10001:80"  # Mengganti port host menjadi 10001
     restart: always
     environment:
       - FLAG=CSUC{jangan_ya_dek_ya__jangan_coba"_main_kayak_begini}
@@ -16,6 +16,6 @@ services:
       WAZUH_MANAGER_IP: 18.141.55.229
       APP_HOST: web
       APP_PORT: 80
-      ENTRY_PORT: 9012
+      ENTRY_PORT: 10001  # Mengganti entry port menjadi 10001
     ports:
-      - 9012:9012 # Envoy listening port
+      - 10001:10001  # Envoy listening port
