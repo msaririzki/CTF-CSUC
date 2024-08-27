@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,77 +8,96 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background: radial-gradient(circle, #ffcc70, #ffb347);
         }
+
         .slot-machine {
-            background-color: #d4af37;
-            border: 10px solid #8b4513;
-            border-radius: 10px;
-            padding: 20px;
+            background: linear-gradient(145deg, #f5d415, #e0af00);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            border: 10px solid #c76c0d;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
             position: relative;
+            max-width: 400px;
         }
+
         .reels {
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
         }
+
         .reel {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             background-color: white;
-            border: 2px solid #333;
-            border-radius: 5px;
+            border: 3px solid #333;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
+            font-size: 50px;
             overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
+
         .symbol {
             display: inline-block;
             transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
+
         .spinning .symbol {
             animation: spin 0.2s linear infinite;
         }
+
         @keyframes spin {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
         }
+
         #spin-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            font-size: 20px;
+            padding: 15px 30px;
+            background-color: #ff9800;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
         }
+
         #spin-button:hover {
-            background-color: #45a049;
+            background-color: #e68900;
         }
+
+        #spin-button:active {
+            transform: scale(0.95);
+        }
+
         #spin-button:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
+
         .points {
             font-size: 24px;
+            color: #fff;
             margin-top: 20px;
         }
-        .points-earned {
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #4CAF50;
-        }
+
         .win-message {
             position: absolute;
             top: 0;
@@ -91,13 +111,22 @@
             flex-direction: column;
             color: gold;
             font-size: 36px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 0.5s ease-out;
+            z-index: 2;
+            border-radius: 15px;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         .win-message button {
             margin-top: 20px;
             font-size: 18px;
@@ -109,11 +138,13 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .win-message button:hover {
             background-color: #ffd700;
         }
     </style>
 </head>
+
 <body>
     <div id="app">
         <div class="slot-machine">
@@ -133,7 +164,11 @@
     </div>
 
     <script>
-        const { createApp, ref, reactive } = Vue;
+        const {
+            createApp,
+            ref,
+            reactive
+        } = Vue;
 
         createApp({
             setup() {
@@ -192,12 +227,12 @@
 
                     const interval = setInterval(() => {
                         reels.value = reels.value.map(() => getRandomSymbol());
-                        
+
                         spins++;
                         if (spins >= maxSpins) {
                             clearInterval(interval);
                             isSpinning.value = false;
-                            
+
                             // Send spin data to server
                             reels_id = reels.value.map((elm) => symbolPoints[elm]);
                             sendSpinDataToServer(reels_id);
@@ -222,4 +257,5 @@
         }).mount('#app');
     </script>
 </body>
+
 </html>
