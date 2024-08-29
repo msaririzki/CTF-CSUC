@@ -4,16 +4,18 @@ import io
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
 	s = requests.Session()
 	cookies = {'role': 'guest'}
 
 	output = io.StringIO()
-	output.write("Usage: Look at the code ;-)\n\n")
+	output.write("<html><body>")
+	output.write("<h1>Welcome to Toko Cake</h1>")
+	output.write("<p>Usage: Look at the code ;-)</p>")
+
 	try:
-		output.write("Overwriting cookies with default value! This must be secure!\n")
+		output.write("<p><strong>Overwriting cookies with default value! This must be secure!</strong></p>")
 		cookies = {**dict(request.cookies), **cookies}
 		headers = {**dict(request.headers)}
 
@@ -23,29 +25,28 @@ def index():
 		r = requests.Request("GET", "http://backend:8086/whoami", cookies=cookies, headers=headers)
 		prep = r.prepare()
 
-		output.write("Prepared request cookies are: ")
+		output.write("<p>Prepared request cookies are: ")
 		output.write(str(prep._cookies.items()))
-		output.write("\n")
-		output.write("Sending request...")
-		output.write("\n")
+		output.write("</p>")
+		output.write("<p>Sending request...</p>")
 		
 		resp = s.send(prep, timeout=2.0)
 		
-		output.write("Request cookies are: ")
+		output.write("<p>Request cookies are: ")
 		output.write(str(resp.request._cookies.items()))
-		output.write("\n\n")
+		output.write("</p>")
 		if 'Admin' in resp.content.decode():
-			output.write("Someone's drunk oO\n\n")
-		output.write("Response is: ")
+			output.write("<p>Someone's drunk oO</p>")
+		output.write("<p>Response is: ")
 		output.write(resp.content.decode())
-		output.write("\n\n")
+		output.write("</p>")
 	except Exception as e:
 		print(e)
-		output.write("Error :-/" + str(e))
-		output.write("\n\n")
+		output.write("<p>Error :-/ " + str(e) + "</p>")
 
-	return Response(output.getvalue(), mimetype='text/plain')
+	output.write("</body></html>")
 
+	return Response(output.getvalue(), mimetype='text/html')
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port='8085', debug=False)
