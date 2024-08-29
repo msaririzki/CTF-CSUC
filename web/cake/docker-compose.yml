@@ -1,0 +1,27 @@
+version: "3.1"
+services:
+  reguest:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    volumes:
+      - "./code:/app"
+    ports:
+      - "8085:8085"
+    depends_on:
+      - backend
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=8085
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      - FLAG=CSUC{C0kis_ya_dek_bukan_roti_S0bek_10202020202}
+    volumes:
+      - "./code:/app"
+    ports:
+      - "8086:8086"

@@ -1,0 +1,11 @@
+version: '3'
+services:
+  csuc:
+    build: .
+    container_name: head
+    ports:
+      - "1778:1778"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development

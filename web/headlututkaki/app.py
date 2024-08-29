@@ -17,17 +17,16 @@ def send_source() -> Response:
     return text_response(SOURCE)
 
 @app.route("/")
+@app.route("/")
 def main_page() -> Response:
-    if "X-Forwarded-For" not in request.headers:
-        return text_response("Unauthorized. Your IP is not whitelisted!", 401)
-
-    ips: List[str] = request.headers["X-Forwarded-For"].split(", ")
-    
-    if ips[0] != "182.168.1.1":
-        return text_response("Access Denied. Only trusted members are allowed.", 403)
-
+    user_agent = request.headers.get("User-Agent")
+    if not user_agent:
+        return text_response("Unauthorized. User-Agent header is missing!", 401)
+    if user_agent != "pacar-zee":
+        return text_response("Access Denied. Only trusted User-Agent is allowed.", 403)
     session['can_solve_puzzle'] = True
     return text_response("Welcome! I am Bond! James Bond!. Solve the puzzle to get the treasure.")
+
 
 @app.route("/puzzle", methods=["POST"])
 def solve_puzzle() -> Response:
