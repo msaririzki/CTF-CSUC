@@ -55,7 +55,7 @@ header("X-CSUC: YV9tYW5kaV9iaWFyX3NlZ2VycnJyfQ==");
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             console.log("%cFlag 1 : Q1NVQ3tKYW5nYW5fbHVw", "color: lime; font-size: 20px;");
         } else {
-            console.log("Tutorial cara segar di web donk wkwk?");
+            console.log("Tutor segar di web donk wkwkwk?");
         }
 
         var terminalText = document.getElementById("terminal-text");
